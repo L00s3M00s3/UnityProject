@@ -1,13 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Disarm_Trap : MonoBehaviour {
+public class Dusting : MonoBehaviour {
+
     public Transform pointA, pointB;
     public LayerMask layer;
     bool overlap;
-    
-
-    
 
     void FixedUpdate()
     {
@@ -16,10 +15,9 @@ public class Disarm_Trap : MonoBehaviour {
 
     void Update()
     {
-        if (overlap&&Input.GetKeyDown(KeyCode.E))
+        if (overlap && Input.GetKeyDown(KeyCode.E))
         {
-            Trap_Control.triggered = false;
+            gameObject.GetComponent<SpiderManager>().cleaned = true;
         }
     }
-    
 }

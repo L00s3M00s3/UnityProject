@@ -73,7 +73,7 @@ public class Pattern_Control : MonoBehaviour {
         }
         else
         {
-            //Write something here about invulnirability
+            
             
                 vulnerable = false;
                 nextfire -= Time.deltaTime;

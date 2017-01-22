@@ -7,6 +7,9 @@ TagManager:
   - Destroy
   - EnemyBullet
   - Enemy
+  - Warp
+  - Gun
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - PC
   - 
   - 
   - 
@@ -43,4 +46,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Backgroud
+    uniqueID: 798415317
+    locked: 0
+  - name: Object
+    uniqueID: 1128907947
+    locked: 0
+  - name: Player
+    uniqueID: 211982509
+    locked: 0
+  - name: Foreground
+    uniqueID: 2627843113
     locked: 0
