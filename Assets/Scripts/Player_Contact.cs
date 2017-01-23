@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Player_Contact : MonoBehaviour {
     public PlayerMovement playermovement;
-    public Adapted_Shooting playershooting;
+    public Player_Shooting playershooting;
 
 
     Transform spawn;
@@ -16,7 +16,7 @@ public class Player_Contact : MonoBehaviour {
     void Start()
     {
         playermovement = GetComponent<PlayerMovement>();
-        playershooting = GetComponent<Adapted_Shooting>();
+        playershooting = GetComponent<Player_Shooting>();
 		anim = GetComponent<Animator>();
 		canBeHit = true;
         spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
@@ -53,19 +53,8 @@ public class Player_Contact : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) //if entering trigger zone
-    {
-        /*
-        if (other.tag == "HealthUp")
-        { //if health item
+    { 
 
-            PlayerMovement.Lives++;  //increase number of lives
-			other.gameObject.SetActive(false); //destroy the pick up item
-			AudioSource.PlayClipAtPoint(PickUpItem, transform.position);
-        }
-        */
-     
-
-	
        /* if (other.tag == "EnemyBullet")
         {
             if (canBeHit)

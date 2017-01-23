@@ -1,29 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Adapted_Shooting: MonoBehaviour
+public class Player_Shooting: MonoBehaviour
 {
 
     public float fireRateCurrent;
-    public float fireRateNormal;
-    public float fireRateIncreased;
     public int bulletlimit = 40;
     public bool isShooting;
-    public bool isFiredUp;
     private float nextbullet;
-    float countdown = 5.0f;
     public bool poweredup;
     public GameObject bulletPrefab;
     GameObject[] mybullets;
     public Transform[] bulletSpawn;
     Transform direction;
     float orient;
-    
-
-
-
-    string[] keys = { "up", "down", "left", "right" };
-
     public Animator anim;
 
     void Awake()
@@ -81,7 +71,7 @@ public class Adapted_Shooting: MonoBehaviour
 
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space) && LeftOrright.right)
+        if (Input.GetKeyDown(KeyCode.Space) && LeftOrRight.right)
         {
 
             if (Time.time > nextbullet)
@@ -107,7 +97,7 @@ public class Adapted_Shooting: MonoBehaviour
 
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space) && LeftOrright.left)
+        if (Input.GetKeyDown(KeyCode.Space) && LeftOrRight.left)
         {
 
             if (Time.time > nextbullet)
@@ -127,60 +117,7 @@ public class Adapted_Shooting: MonoBehaviour
         }
     }
 
-    void AllShoot()
-    {
-        countdown -= Time.deltaTime;
-
-
-        if (countdown <= 0)
-        {
-            poweredup = false;
-            countdown = 5.0f;
-            
-        }
-        else
-        {
-            
-            foreach (string k in keys)
-            {
-                if (Input.GetKey(k))
-                {
-                    if (Time.time > nextbullet)
-                    {
-
-                        nextbullet = Time.time + fireRateCurrent;
-
-                        BulletFire(bulletSpawn[0].transform);
-                        BulletFire(bulletSpawn[1].transform);
-                        BulletFire(bulletSpawn[2].transform);
-                        BulletFire(bulletSpawn[3].transform);
-                    }
-                }
-            }
-
-        }
-    }
-
-    void FireUp()
-    {
-
-        countdown -= Time.deltaTime;
-        if (countdown <= 0)
-        {
-
-            isFiredUp = false;
-            fireRateCurrent = fireRateNormal;
-            countdown = 5.0f;
-           
-
-        }
-        else {
-
-            fireRateCurrent = fireRateIncreased;
-            
-        }
-
-    }
+    
 
 
 

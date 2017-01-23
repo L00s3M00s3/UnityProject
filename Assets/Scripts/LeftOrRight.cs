@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeftOrright : MonoBehaviour {
+public class LeftOrRight : MonoBehaviour {
     public Transform point,point2;
     public static bool right,left;
 	
