@@ -4,11 +4,6 @@ using System.Collections;
 public class DestroyEnemy : MonoBehaviour{
 
 
-	ItemManager itemmanager;
-	private float spawnLife = 5;
-	private float spawnPower = 2;
-	private float spawnSpeed = 5;
-	private float spawnFire = 5;
     public static int deadenemies;
 	public GameObject splatter;
 
@@ -26,13 +21,8 @@ public class DestroyEnemy : MonoBehaviour{
 
 	void Awake()
 	{
-		//itemmanager = GameObject.Find ("Item_Manager").GetComponent<ItemManager> ();
 		splatter.GetComponent<Splat2D> ();
-		damaged = false;
-		
-
-
-
+        damaged = false;
 	}
 
 	void Update()
@@ -61,16 +51,11 @@ public class DestroyEnemy : MonoBehaviour{
 
                 if (CurrentHP < 0)
                 {
-
-                    SpawnLife();
-                    SpawnPower();
-                    SpawnSpeed();
-                    SpawnFire();
-                deadenemies++;
+                    deadenemies++;
                     CurrentHP = MaxHP;
 
                     this.gameObject.SetActive(false);
-                    //other.gameObject.SetActive(false); //deactivate bullet
+                    other.gameObject.SetActive(false); 
 
                     Instantiate(splatter, new Vector2(transform.position.x, transform.position.y), transform.rotation);
 
@@ -85,43 +70,7 @@ public class DestroyEnemy : MonoBehaviour{
 
 	}
 
-	void SpawnPower()
-	{
 	
-		if (spawnPower > Random.Range (0.0f, 100f)) {
-		
-			//itemmanager.Activatepower(gameObject.transform);
-
-		}
-	}
-
-	void SpawnLife()
-	{
-		if (spawnLife > Random.Range (0.0f, 100f)) {
-
-			//itemmanager.ActivateLife (gameObject.transform);
-
-		}
-
-	}
-	void SpawnSpeed()
-	{
-		if (spawnSpeed > Random.Range (0.0f, 100f)) {
-
-			//itemmanager.ActivateSpeedUp (gameObject.transform);
-
-		}
-
-	}
-	void SpawnFire()
-	{
-		if (spawnFire> Random.Range (0.0f, 100f)) {
-
-			//itemmanager.ActivateFireUp (gameObject.transform);
-
-		}
-
-	}
 
 
 

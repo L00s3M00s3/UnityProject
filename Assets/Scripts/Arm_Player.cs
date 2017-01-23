@@ -17,7 +17,7 @@ public class Arm_Player : MonoBehaviour {
     {
         if (overlap && Input.GetKeyDown(KeyCode.E))
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Adapted_Shooting>().poweredup = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Shooting>().poweredup = true;
             GameObject.FindGameObjectWithTag("Gun").GetComponent<SpriteRenderer>().enabled = false;
         }
     }

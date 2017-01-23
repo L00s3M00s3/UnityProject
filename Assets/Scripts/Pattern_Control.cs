@@ -110,7 +110,7 @@ public class Pattern_Control : MonoBehaviour {
 
     void ChangeState()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Adapted_Shooting>().poweredup)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Shooting>().poweredup)
         {
             _state = State.worried;
         }

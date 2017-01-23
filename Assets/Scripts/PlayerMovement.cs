@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-	
+        issafe = true;
 		rbody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		anim.SetFloat ("Input_y", -1);
@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void PlayerControl()
     {
-        //WASDmovement ();
+        
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Input.GetAxisRaw("Vertical");
 
@@ -90,7 +90,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 
-        rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * currentSpeed);
+        
+        rbody.velocity = movement_vector*speed;
         //update rbody position
     }
 
