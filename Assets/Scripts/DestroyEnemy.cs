@@ -21,8 +21,13 @@ public class DestroyEnemy : MonoBehaviour{
 
 	void Awake()
 	{
+		
 		splatter.GetComponent<Splat2D> ();
-        damaged = false;
+		damaged = false;
+		
+
+
+
 	}
 
 	void Update()
@@ -38,6 +43,7 @@ public class DestroyEnemy : MonoBehaviour{
 		damaged = false;
 	}
 
+
 	void OnTriggerEnter2D(Collider2D other)
 	{
        
@@ -51,11 +57,12 @@ public class DestroyEnemy : MonoBehaviour{
 
                 if (CurrentHP < 0)
                 {
-                    deadenemies++;
+
+                deadenemies++;
                     CurrentHP = MaxHP;
 
                     this.gameObject.SetActive(false);
-                    other.gameObject.SetActive(false); 
+                    //other.gameObject.SetActive(false); //deactivate bullet
 
                     Instantiate(splatter, new Vector2(transform.position.x, transform.position.y), transform.rotation);
 
@@ -69,9 +76,6 @@ public class DestroyEnemy : MonoBehaviour{
 
 
 	}
-
-	
-
 
 
 

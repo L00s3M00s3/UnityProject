@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Player_Contact : MonoBehaviour {
     public PlayerMovement playermovement;
-    public Player_Shooting playershooting;
+    public PlayerShooting playershooting;
 
 
     Transform spawn;
@@ -16,7 +16,7 @@ public class Player_Contact : MonoBehaviour {
     void Start()
     {
         playermovement = GetComponent<PlayerMovement>();
-        playershooting = GetComponent<Player_Shooting>();
+        playershooting = GetComponent<PlayerShooting>();
 		anim = GetComponent<Animator>();
 		canBeHit = true;
         spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
@@ -33,7 +33,7 @@ public class Player_Contact : MonoBehaviour {
 				
 				canBeHit = false;
 
-				GetComponent<Rigidbody2D> ().isKinematic = true;
+				//GetComponent<Rigidbody2D> ().isKinematic = true;
 				GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 			
 			//PlayerMovement.Lives--;
@@ -53,30 +53,8 @@ public class Player_Contact : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D other) //if entering trigger zone
-    { 
-
-       /* if (other.tag == "EnemyBullet")
-        {
-            if (canBeHit)
-            {
-
-                canBeHit = false;
-
-                GetComponent<Rigidbody2D>().isKinematic = true;
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                //AddTime(extraTime);
-                //PlayerMovement.Lives--;
-
-
-           
-                anim.SetTrigger("Die");
-
-
-
-
-                //play hurt sound
-            }
-        }*/
+    {
+        
     }
 
 

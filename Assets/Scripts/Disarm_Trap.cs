@@ -5,9 +5,6 @@ public class Disarm_Trap : MonoBehaviour {
     public Transform pointA, pointB;
     public LayerMask layer;
     bool overlap;
-    
-
-    
 
     void FixedUpdate()
     {
@@ -18,7 +15,8 @@ public class Disarm_Trap : MonoBehaviour {
     {
         if (overlap&&Input.GetKeyDown(KeyCode.E))
         {
-            Trap_Control.triggered = false;
+            Debug.Log("Overlap");
+			Trap_Control.triggered = false;
         }
     }
     

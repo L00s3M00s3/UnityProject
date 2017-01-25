@@ -13,7 +13,8 @@ public class Pattern_Control : MonoBehaviour {
     public bool vulnerable;
     int limit = 21;
     float fragile = 1.0f;
-    State _state = State.relaxed;
+    [HideInInspector]
+    public State _state = State.relaxed;
 
 
     // Use this for initialization
@@ -73,7 +74,7 @@ public class Pattern_Control : MonoBehaviour {
         }
         else
         {
-            
+            //Write something here about invulnirability
             
                 vulnerable = false;
                 nextfire -= Time.deltaTime;
@@ -110,7 +111,7 @@ public class Pattern_Control : MonoBehaviour {
 
     void ChangeState()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Shooting>().poweredup)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>().poweredup)
         {
             _state = State.worried;
         }
@@ -129,6 +130,8 @@ public class Pattern_Control : MonoBehaviour {
             }
         }
     }
+
+    
 
     
 

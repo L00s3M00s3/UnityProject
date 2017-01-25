@@ -17,7 +17,7 @@ public class SpiderManager : MonoBehaviour {
             spiderarray[i] = Instantiate(spider) as GameObject;
             spiderarray[i].SetActive(false);
         }
-        spawntime = 3.0f;
+        spawntime = 5.0f;
         cleaned = false;
 
 	}
@@ -29,6 +29,8 @@ public class SpiderManager : MonoBehaviour {
 
     void Spawn()
     {
+
+
         if (!cleaned)
         {
             for (int i = 0; i < limit; i++)

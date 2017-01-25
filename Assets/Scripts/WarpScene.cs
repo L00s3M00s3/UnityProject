@@ -20,7 +20,7 @@ public class WarpScene : MonoBehaviour {
 			
 			screenFading sf = GameObject.FindGameObjectWithTag ("Fader").GetComponent<screenFading> ();
 
-		    yield return StartCoroutine(sf.FadeToBlack());
+			yield return StartCoroutine(sf.FadeToBlack());
 			yield return StartCoroutine (sf.FadeToClear ());
 
 
