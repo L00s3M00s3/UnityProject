@@ -9,10 +9,11 @@ public class Pattern_Control : MonoBehaviour {
     SpriteRenderer Sprite;
     private float nextfire, worriedfire;
     public float ROF, WROF;
-    bool armed = false;
+
     public bool vulnerable;
     int limit = 21;
     float fragile = 1.0f;
+    Inventory currentItem;
     [HideInInspector]
     public State _state = State.relaxed;
 
@@ -21,6 +22,7 @@ public class Pattern_Control : MonoBehaviour {
     void Awake () {
         Sprite = GetComponentInParent<SpriteRenderer>();
         enemybullets = new GameObject[limit];
+        currentItem = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         nextfire = 2.0f;
         for(int i = 0; i < limit; i++)
         {
@@ -111,9 +113,13 @@ public class Pattern_Control : MonoBehaviour {
 
     void ChangeState()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShooting>().poweredup)
+        if (currentItem.currentItem.Equals(Inventory.Items.Gun))
         {
             _state = State.worried;
+        }
+        else
+        {
+            _state = State.relaxed;
         }
     }
 

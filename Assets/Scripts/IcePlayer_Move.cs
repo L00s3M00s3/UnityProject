@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class IcePlayer_Move : PlayerMovement {
     float max_Speed = 5f;
+    bool direction;
 	// Update is called once per frame
 	void FixedUpdate () {
         PlayerControl();
+        
         if (rbody.velocity.magnitude > max_Speed)
         {
             rbody.velocity = rbody.velocity.normalized * max_Speed;
         }
+        
 	}
 
     public override void PlayerControl()
     {
-        if (!GetComponent<Ice_Detection>().IceDetection)
+        if ((!GetComponent<Ice_Detection>().IceDetection&&!direction))
         {
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Input.GetAxisRaw("Vertical");
+            orient();
 
 
-        movement_vector = new Vector2(Horizontal, Vertical);
+            movement_vector = new Vector2(Horizontal, Vertical);
         //aniamte movements
         if (movement_vector != Vector2.zero)
         { //if there is an input command
@@ -42,12 +46,29 @@ public class IcePlayer_Move : PlayerMovement {
             rbody.AddForce(movement_vector * speed,ForceMode2D.Force);
         }
     }
+    
+    void Player_Direction()
+    {
+        if (GetComponent<Ice_Detection>().IceDetection)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(orientation.transform.position, transform.up, .5f, 10);
+            if (hit.collider != null)
+            {
+                direction = true;
+                Debug.Log(direction);
+            }
+            else
+            {
+                direction = false;
+            }
+        }
+    }
      void OnCollisionEnter2D(Collision2D collision)
     {
         
-        GetComponent<Ice_Detection>().IceDetection = false;
-        
+            GetComponent<Ice_Detection>().IceDetection = false;
     }
+
     void OnCollisionExit2D(Collision2D collision)
     {
         GetComponent<Ice_Detection>().IceDetection = true;

@@ -13,13 +13,14 @@ public class PlayerMovement : MonoBehaviour {
     public float Horizontal, Vertical;
     public float combine;
     public bool issafe, iscleaning;
-    [HideInInspector]
+    
     public Transform orientation;
+    [HideInInspector]
     public Vector2 movement_vector;
 
 
 
-    private float currentSpeed;
+
 
 
 	// Use this for initialization
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		anim.SetFloat ("Input_y", -1);
 	
-		currentSpeed = speed;
+		
         
 
 
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
         
 	}
 
-	void orient()
+	public void orient()
 	{
 		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 		{

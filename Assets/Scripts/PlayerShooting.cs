@@ -10,7 +10,7 @@ public class PlayerShooting: MonoBehaviour
     public bool isShooting;
   
     private float nextbullet;
-    float countdown = 5.0f;
+
 
     public bool poweredup;
 
@@ -19,7 +19,7 @@ public class PlayerShooting: MonoBehaviour
     public Transform[] bulletSpawn;
     Transform direction;
 
-    float orient;
+
     
 
 
@@ -45,25 +45,13 @@ public class PlayerShooting: MonoBehaviour
     void Update()
     {
         
-        direction = GetComponent<PlayerMovement>().orientation;
-        orient = GetComponent<PlayerMovement>().combine;
-        
-        //orientationshooting(orient);
-        
-        //if (GetComponent<Player_Contact>().canBeHit)
-       // {
-            if (poweredup)
-            { 
-                DirectionalShooting();
-            }
-       // }
-
+        direction = GetComponentInParent<PlayerMovement>().orientation;
     }
 
     
    
 
-    void DirectionalShooting()
+    public void DirectionalShooting()
     {
 
 		if (Input.GetKey(KeyCode.Space)&&direction.rotation.z == 0.0f)
