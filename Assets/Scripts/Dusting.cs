@@ -17,7 +17,7 @@ public class Dusting : Overlap_Generic {
 
     void Update()
     {
-		if (overlap && Input.GetKeyDown(KeyCode.E))
+		if (overlap)
         {
             StartCoroutine("Cleaning");
         }

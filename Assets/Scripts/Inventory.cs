@@ -34,8 +34,9 @@ public class Inventory : MonoBehaviour {
 
     void Update()
     {
-        SwitchStates();
         SwitchItem();
+        SwitchStates();
+        
     }
     
     void SwitchStates()
@@ -45,15 +46,16 @@ public class Inventory : MonoBehaviour {
         {
             case Items.Unarmed:
                 
-                GetComponentInChildren<GenericInteraction>().Interation(9);
+                GetComponentInChildren<GenericInteraction>().Interaction(LayerMask.NameToLayer("Interact"));
                 break;
             case Items.Gun:
                 GetComponentInChildren<PlayerShooting>().DirectionalShooting();
                 break;
             case Items.Duster:
+                GetComponentInChildren<GenericInteraction>().Interaction(LayerMask.NameToLayer("Dusting"));
                 break;
             default:
-                GetComponentInChildren<GenericInteraction>().Interation(11);
+                GetComponentInChildren<GenericInteraction>().Interaction(LayerMask.NameToLayer("Interact"));
                 break;
         }
     }

@@ -47,7 +47,7 @@ public class DestroyEnemy : MonoBehaviour{
 	void OnTriggerEnter2D(Collider2D other)
 	{
        
-            if (other.tag == "Bullet")
+            if (other.tag == "Bullet"&&GetComponentInChildren<Pattern_Control>().vulnerable)
             {
 
                 CurrentHP -= 1;

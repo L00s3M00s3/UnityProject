@@ -7,7 +7,7 @@ public class Player_Contact : MonoBehaviour {
     public PlayerShooting playershooting;
 
 
-    Transform spawn;
+    //Transform spawn;
 
 	public Animator anim;
 	public bool canBeHit;
@@ -19,7 +19,7 @@ public class Player_Contact : MonoBehaviour {
         playershooting = GetComponent<PlayerShooting>();
 		anim = GetComponent<Animator>();
 		canBeHit = true;
-        spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
+        //spawn = GameObject.FindGameObjectWithTag("Respawn").transform;
 
     }
 
@@ -60,7 +60,7 @@ public class Player_Contact : MonoBehaviour {
 
 	public void Respawn()
 	{
-		gameObject.transform.position = spawn.position;
+		//gameObject.transform.position = spawn.position;
 		StartCoroutine ("Flash");
 
 	}

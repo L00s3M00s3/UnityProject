@@ -7,16 +7,21 @@ public class GenericInteraction : MonoBehaviour {
     private bool interacting = false;
     private float interactionTimer = 0;
     private float cooldown = 0.3f;
-    public Collider2D interactionRange;
+    public GameObject interaction;
+    Collider2D interactionRange;
 
 	// Use this for initialization
 	void Awake () {
+        interactionRange = interaction.GetComponent<Collider2D>();
         interactionRange.enabled = false;
 	}
 	
-	public void Interation(int layer)
+	public void Interaction(int layer)
     {
-        
+        if (interaction.layer != layer)
+        {
+            interaction.layer = layer;
+        }
         if (Input.GetKeyDown(KeyCode.E) && !interacting)
         {
             interacting = true;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+//Deactivates bullets once they hit the out destroy trigger within the game
 public class DestroyBullet : MonoBehaviour {
 
 
