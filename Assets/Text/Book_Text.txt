@@ -1,0 +1,3 @@
+Move with your Arrow or WASD Keys
+Interact with objects with E
+Use weapons with Space

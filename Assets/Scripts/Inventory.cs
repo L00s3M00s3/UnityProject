@@ -41,7 +41,10 @@ public class Inventory : MonoBehaviour {
     
     void SwitchStates()
     {
-
+        if (!GetComponentInParent<PlayerMovement>().canMove)
+        {
+            return;
+        }
         switch (currentItem)
         {
             case Items.Unarmed:

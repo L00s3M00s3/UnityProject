@@ -52,10 +52,7 @@ public class Player_Contact : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter2D(Collider2D other) //if entering trigger zone
-    {
-        
-    }
+  
 
 
 	public void Respawn()

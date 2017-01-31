@@ -2,30 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReadBook : MonoBehaviour {
+public class ReadBook : Overlap_Generic {
 
-	public Transform pointA, pointB;
-	public LayerMask layer;
-	bool overlap;
+    public TextAsset theText;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public int startLine, endLine;
 
-	void FixedUpdate()
-	{
-		overlap = Physics2D.OverlapArea(pointA.position, pointB.position, layer);
-	}
+    TextBoxManager textBox;
 
-	
-	// Update is called once per frame
-	void Update () {
+    ActivateTextAtLine textAtLine;
 
-		if (overlap && Input.GetKeyDown(KeyCode.E)) {
-			Debug.Log ("Overlapping");
-			//open book text
-		
+    void Start()
+    {
+        textBox = FindObjectOfType<TextBoxManager>();
+        textAtLine = FindObjectOfType<ActivateTextAtLine>();
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+		if (overlap) {
+            textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
 		}
 	}
 }

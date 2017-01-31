@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public float Horizontal, Vertical;
     public float combine;
     public bool issafe, iscleaning;
+    public bool canMove = true;
     
     public Transform orientation;
     [HideInInspector]
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-	
+        
 		rbody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		anim.SetFloat ("Input_y", -1);
@@ -54,6 +55,11 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	public virtual void PlayerControl () {
+
+        if (!canMove)
+        {
+            return;
+        }
 
 		Horizontal = Input.GetAxisRaw ("Horizontal");
 		Vertical = Input.GetAxisRaw ("Vertical");
