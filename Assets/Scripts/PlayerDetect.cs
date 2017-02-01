@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDetect : MonoBehaviour {
     
     public PlayerMovement PC;
+    
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,6 +13,7 @@ public class PlayerDetect : MonoBehaviour {
         {
             PC.issafe = true;
         }
+        
     }
     void OnTriggerExit2D(Collider2D other)
     {

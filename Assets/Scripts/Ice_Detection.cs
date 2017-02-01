@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Ice_Detection : MonoBehaviour {
     [HideInInspector]
-    public bool IceDetection = false;
+    public bool IceDetection,OnIce = false;
 	void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Ice")
         {
+            OnIce = true;
             IceDetection = true;
         }
     }
@@ -16,6 +17,7 @@ public class Ice_Detection : MonoBehaviour {
     {
         if (other.tag == "Ice")
         {
+            OnIce = false;
             IceDetection = false;
         }
     }

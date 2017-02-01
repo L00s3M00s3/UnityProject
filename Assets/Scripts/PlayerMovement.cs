@@ -46,11 +46,15 @@ public class PlayerMovement : MonoBehaviour {
         
         
            PlayerControl();
-        
+
 		if (!issafe && LightFlicker.dark) {
-		
+            isDead = true;
 			Debug.Log ("Dead");
 		}
+        else
+        {
+            isDead = false;
+        }
 	}
 
 

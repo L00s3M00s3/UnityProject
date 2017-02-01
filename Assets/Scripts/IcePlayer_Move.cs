@@ -69,50 +69,75 @@ public class IcePlayer_Move : PlayerMovement {
     }
      void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        movement_vector = Vector2.zero;
+        if (GetComponent<Ice_Detection>().OnIce)
+        {
             if (!direction)
             {
+                
                 GetComponent<Ice_Detection>().IceDetection = false;
                 direction = true;
-                movement_vector = Vector2.zero;
+
             }
             Debug.Log(direction);
-        
+        }
     }
 
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (GetComponent<Ice_Detection>().OnIce)
+        {
+            movement_vector = Vector2.zero;
+
+            if (!direction)
+            {
+                GetComponent<Ice_Detection>().IceDetection = true;
+            }
+        }
+    }
 
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        
+        if (GetComponent<Ice_Detection>().OnIce)
+        {
             GetComponent<Ice_Detection>().IceDetection = true;
-           direction = false;
-        
-    
-        Debug.Log("Leave");
+            direction = false;
+            Debug.Log("Leave");
+        }
     }
     void SlideMovement()
     {
+        anim.SetBool("isWalking", false);
         if (direction)
         {
             if(Input.GetKeyDown(KeyCode.W)|| Input.GetKeyDown(KeyCode.UpArrow))
             {
-                rbody.velocity = Vector2.up * 20f;
+
+                rbody.velocity = Vector2.up * max_Speed;
+                anim.SetFloat("Input_x", Vector2.up.x);
+                anim.SetFloat("Input_y", Vector2.up.y);
                 direction = false;
             }
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                rbody.AddForce(Vector2.left * 20f, ForceMode2D.Force);
+                rbody.velocity = Vector2.left * max_Speed;
+                anim.SetFloat("Input_x", Vector2.left.x);
+                anim.SetFloat("Input_y", Vector2.left.y);
                 direction = false;
             }
             if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
             {
-                rbody.AddForce(Vector2.down * 20f, ForceMode2D.Force);
+                rbody.velocity = Vector2.down * max_Speed;
+                anim.SetFloat("Input_x", Vector2.down.x);
+                anim.SetFloat("Input_y", Vector2.down.y);
                 direction = false;
             }
             if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
-                rbody.AddForce(Vector2.right * 20f, ForceMode2D.Force);
+                rbody.velocity = Vector2.right * max_Speed;
+                anim.SetFloat("Input_x", Vector2.right.x);
+                anim.SetFloat("Input_y", Vector2.right.y);
                 direction = false;
             }
         }

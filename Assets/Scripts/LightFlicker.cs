@@ -4,25 +4,36 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour {
     public static bool dark = false;
+    public static bool fade = false;
     float switchtime = 3.0f;
 	
 	
 	// Update is called once per frame
 	void Update () {
-        if (switchtime < 0)
+        if (!FuseBox.repaired)
         {
-            StartCoroutine("FlickerOff");
-            StartCoroutine("FlickerOn");
-            switchtime = 3.0f;
-            Debug.Log(dark);
+            if (switchtime < 0)
+            {
+                StartCoroutine("FlickerOff");
+                StartCoroutine("FlickerOn");
+                switchtime = 3.0f;
+
+            }
+            switchtime -= Time.deltaTime;
         }
-        switchtime -= Time.deltaTime;
+        else
+        {
+            GetComponent<Light>().enabled = true;
+            dark = false;
+            fade = false;
+        }
 	}
 
     IEnumerator FlickerOff()
     {
         if (!dark)
         {
+            fade = true;
             GetComponent<Light>().enabled = false;
             yield return new WaitForSeconds(0.2f);
 
@@ -45,6 +56,7 @@ public class LightFlicker : MonoBehaviour {
     {
         if (dark)
         {
+            fade = false;
             GetComponent<Light>().enabled = true;
             yield return new WaitForSeconds(0.2f);
 
