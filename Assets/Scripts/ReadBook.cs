@@ -14,7 +14,7 @@ public class ReadBook : Overlap_Generic {
 
     void Start()
     {
-        textBox = FindObjectOfType<TextBoxManager>();
+        textBox = FindObjectOfType<TextBoxManager>();   
         textAtLine = FindObjectOfType<ActivateTextAtLine>();
     }
 

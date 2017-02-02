@@ -12,6 +12,7 @@ public class PlayerDetect : MonoBehaviour {
         if(other.tag == "Player")
         {
             PC.issafe = true;
+            Debug.Log("Enter");
         }
         
     }
@@ -20,6 +21,7 @@ public class PlayerDetect : MonoBehaviour {
         if (other.tag == "Player")
         {
             PC.issafe = false;
+            Debug.Log("Exit");
         }
     }
 

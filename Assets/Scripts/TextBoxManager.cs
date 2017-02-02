@@ -17,7 +17,8 @@ public class TextBoxManager : MonoBehaviour {
     PlayerMovement playermovement;
 
     public bool active,freezePlayer,buttonPress;
-    bool waitforpress;
+    bool istyping,cancelTyping;
+    public float typeSpeed;
 
 	// Use this for initialization
 	void Start () {
@@ -53,28 +54,60 @@ public class TextBoxManager : MonoBehaviour {
         {
             return;
         }
-        theText.text = textLines[currentLine];
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            currentLine++;
+            if (!istyping)
+            {
+                currentLine++;
+
+                if (currentLine > endLine)
+                {
+                    DisableText();
+                }
+                else
+                {
+                    StartCoroutine(TextScroll(textLines[currentLine]));
+                }
+            }
+            else if(istyping&&!cancelTyping)
+            {
+                cancelTyping = true;
+            }
         }
 
-        if(currentLine > endLine)
-        {
-            DisableText();
-        }
+        
 		
 	}
 
+    IEnumerator TextScroll(string lineOfText)
+    {
+        int letter = 0;
+        theText.text = "";
+        istyping = true;
+        cancelTyping = false;
+        while(istyping&&!cancelTyping&&(letter<lineOfText.Length - 1))
+        {
+            theText.text += lineOfText[letter];
+            letter += 1;
+            yield return new WaitForSeconds(typeSpeed);
+        }
+        theText.text = lineOfText;
+        istyping = false;
+        cancelTyping = false;
+    }
+
     public void EnableText()
     {
+        
         textbox.SetActive(true);
         active = true;
+        GenericInteraction.engaged = true;
         if (freezePlayer)
         {
             playermovement.canMove = false;
         }
+        StartCoroutine(TextScroll(textLines[currentLine]));
     }
 
     public void DisableText()
@@ -82,6 +115,8 @@ public class TextBoxManager : MonoBehaviour {
         textbox.SetActive(false);
         active = false;
         playermovement.canMove = true;
+        GenericInteraction.engaged = false;
+
     }
 
     public void ReloadScript(TextAsset theText)
