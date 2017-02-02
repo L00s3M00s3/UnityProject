@@ -17,6 +17,7 @@ public class Disarm_Trap : MonoBehaviour {
         {
             Debug.Log("Overlap");
 			Trap_Control.triggered = false;
+            GameController.goal = true;
         }
     }
     

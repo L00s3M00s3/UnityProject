@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        
+        GameController.goal = false;
 		rbody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		anim.SetFloat ("Input_y", -1);
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
 		orient ();
         combine = Horizontal + Vertical;
 
-        
+
         
            PlayerControl();
 

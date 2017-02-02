@@ -11,6 +11,7 @@ public class FuseBox : Overlap_Generic {
         if (overlap)
         {
             repaired = true;
+            GameController.goal = true;
         }
     }
 }

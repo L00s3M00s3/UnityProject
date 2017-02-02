@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class WarpScene : MonoBehaviour {
     //public int levelnum = 1; //start level 1
 
-    string[] levelList = {"Combat","FreezerRoom","TrapRoom" };
+    string[] levelList = {"Combat","FreezerRoom","TrapRoom","DarkRoom_Test" };
     static List<string> availableLevels;
     int random;
     bool end;
@@ -45,26 +45,35 @@ public class WarpScene : MonoBehaviour {
         Debug.Log(LeveltoLoad);
         
     }
-	void OnTriggerEnter2D (Collider2D other)
-	{
-       
-        if (other.tag == "Player") {
 
-            //levelnum += 1; //increment to next level
-            if (!end)
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (GameController.goal)
+        {
+            if (other.tag == "Player")
             {
-                SceneManager.LoadScene(LeveltoLoad);
+
+                //levelnum += 1; //increment to next level
+                if (!end)
+                {
+                    SceneManager.LoadScene(LeveltoLoad);
+                }
+                else
+                {
+                    if (Application.platform.Equals(RuntimePlatform.WindowsEditor))
+                        UnityEditor.EditorApplication.isPlaying = false;
+                }
+
+                //screenFading sf = GameObject.FindGameObjectWithTag ("Fader").GetComponent<screenFading> ();
+                //yield return StartCoroutine(sf.FadeToBlack());
+                //yield return StartCoroutine (sf.FadeToClear ());
             }
-            else
-            {
-                if(Application.platform.Equals(RuntimePlatform.WindowsEditor))
-                UnityEditor.EditorApplication.isPlaying = false;
-            }
-			
-			//screenFading sf = GameObject.FindGameObjectWithTag ("Fader").GetComponent<screenFading> ();
-			//yield return StartCoroutine(sf.FadeToBlack());
-			//yield return StartCoroutine (sf.FadeToClear ());
-		}
-	}
+        }
+        else
+        {
+            Debug.Log(Application.loadedLevelName + "still has challanges left");
+        }
+    }
 
 }

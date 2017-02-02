@@ -76,8 +76,7 @@ public class TextBoxManager : MonoBehaviour {
             }
         }
 
-        
-		
+
 	}
 
     IEnumerator TextScroll(string lineOfText)
@@ -121,6 +120,7 @@ public class TextBoxManager : MonoBehaviour {
 
     public void ReloadScript(TextAsset theText)
     {
+        GameController.goal = true;
         if(theText != null)
         {
             textLines = new string[1];

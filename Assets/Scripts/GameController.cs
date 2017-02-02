@@ -6,17 +6,18 @@ public class GameController : MonoBehaviour {
 
 	public static GameController instance = null;
     public static List<string> visitedLevels;
+    public static bool goal;
 
     // Use this for initialization
     void Awake () {
-	
+        
 		if (instance == null) {
-			
-			instance = this;
+            
+            instance = this;
             visitedLevels = new List<string>(1);
 		} else if (instance != this) {
-		
-			Destroy (gameObject);
+            
+            Destroy (gameObject);
 		}
 
 		DontDestroyOnLoad (gameObject);

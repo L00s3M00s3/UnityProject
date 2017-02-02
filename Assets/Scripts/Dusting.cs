@@ -6,6 +6,8 @@ public class Dusting : Overlap_Generic {
 
 	private Color color;
 	public float FadeSpeed;
+    
+    static int websCleaned = 0;
 
     
 
@@ -27,9 +29,14 @@ public class Dusting : Overlap_Generic {
 
 			if (color.a <= 0)
 			{
+                websCleaned++;
 				Destroy(gameObject);
 
 			}
+            if (websCleaned >= 4)
+            {
+                GameController.goal = true;
+            }
     }
 }
 
