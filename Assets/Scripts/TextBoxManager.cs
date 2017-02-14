@@ -139,7 +139,8 @@ public class TextboxManager : MonoBehaviour {
 
 	public void ReloadScript(TextAsset theText)
 	{
-		if(theText != null)
+        
+        if (theText != null)
 		{
 			textLines = new string[1];
 			textLines = (theText.text.Split('\n'));

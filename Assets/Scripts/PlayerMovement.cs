@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Animator anim;
 	public Rigidbody2D rbody;
-
+    Vector3 position;
 	public float speed; //determines speed of player character
 	public bool isDead; //determines whether player is dead
 	[HideInInspector]
@@ -28,8 +28,21 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Awake () {
-        
+	void Start () {
+        position = GameController.lastPosition[SceneManager.GetActiveScene().buildIndex];
+        Debug.Log(position);
+        if (position != Vector3.zero)
+        {
+            gameObject.transform.position = position;
+        }
+
+
+        /*
+        if ()
+        {
+            gameObject.transform.position = GameController.lastPosition[SceneManager.GetActiveScene().buildIndex];
+        }
+        */
         isDead = false;
 		GameController.goal = false;
 		rbody = GetComponent<Rigidbody2D> ();
@@ -42,8 +55,10 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-	// Update is called once per frame
-	void FixedUpdate () {
+    
+
+    // Update is called once per frame
+    void FixedUpdate () {
 
 		orient ();
 		combine = Horizontal + Vertical;

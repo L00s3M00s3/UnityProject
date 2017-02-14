@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class GenericInteraction : MonoBehaviour {
 
-	public static bool engaged;
-
+	
 	private bool interacting = false;
 	private float interactionTimer = 0;
 	private float cooldown = 0.3f;
 	[HideInInspector]
-	public Collider2D interactionRange;
+	Collider2D interactionRange;
 	public GameObject interaction;
+    public static bool engaged;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake () {
 		
 		interactionRange = interaction.GetComponent<Collider2D> ();
-		interactionRange.enabled = false;
+        interaction.SetActive(false);
 
 	}
 
@@ -33,20 +33,21 @@ public class GenericInteraction : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.E) && !interacting) {
 				interacting = true;
 				interactionTimer = cooldown;
-				interactionRange.enabled = true;
-			}
+                interactionRange.enabled = true;
+            }
 			if (interacting) {//Interaction cool-down
 				if (interactionTimer > 0) {
 					interactionTimer -= Time.deltaTime;
 				} else {
 					//Disables the interaction box
 					interacting = false;
-					interactionRange.enabled = false;
+                    interactionRange.enabled = false;
 				}
 
 			}
 		} else {
-			interactionRange.enabled = false;
+            
+            interactionRange.enabled = false;
 		}
 	}
 
