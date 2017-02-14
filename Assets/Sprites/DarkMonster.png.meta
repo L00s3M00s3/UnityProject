@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a25d839ca337cb1458f6e58613de5045
-timeCreated: 1485529000
+timeCreated: 1486408329
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -98,10 +98,10 @@ TextureImporter:
       name: DarkMonster_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 6
         y: 403
-        width: 193
-        height: 193
+        width: 180
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,9 +112,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 202
-        y: 404
-        width: 193
-        height: 193
+        y: 406
+        width: 175
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,10 +124,10 @@ TextureImporter:
       name: DarkMonster_2
       rect:
         serializedVersion: 2
-        x: 403
+        x: 405
         y: 404
-        width: 193
-        height: 193
+        width: 173
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,10 @@ TextureImporter:
       name: DarkMonster_3
       rect:
         serializedVersion: 2
-        x: 3
+        x: 6
         y: 202
-        width: 193
-        height: 193
+        width: 172
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: DarkMonster_4
       rect:
         serializedVersion: 2
-        x: 205
-        y: 202
-        width: 193
-        height: 193
+        x: 206
+        y: 203
+        width: 175
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: DarkMonster_5
       rect:
         serializedVersion: 2
-        x: 402
-        y: 202
-        width: 193
-        height: 193
+        x: 404
+        y: 205
+        width: 173
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -177,9 +177,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4
-        y: 5
-        width: 193
-        height: 193
+        y: 4
+        width: 175
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,9 +190,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 203
-        y: 3
-        width: 193
-        height: 193
+        y: 9
+        width: 175
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,9 +202,9 @@ TextureImporter:
       name: DarkMonster_8
       rect:
         serializedVersion: 2
-        x: 402
+        x: 406
         y: 4
-        width: 193
+        width: 171
         height: 193
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

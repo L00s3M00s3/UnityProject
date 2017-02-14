@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -9,15 +10,17 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float speed; //determines speed of player character
 	public bool isDead; //determines whether player is dead
+	[HideInInspector]
+	public float Horizontal, Vertical;
+	public float combine;
     [HideInInspector]
-    public float Horizontal, Vertical;
-    public float combine;
-    public bool issafe, iscleaning;
-    public bool canMove = true;
-    
-    public Transform orientation;
-    [HideInInspector]
-    public Vector2 movement_vector;
+    public static int currentScene;
+	public bool issafe, iscleaning;
+	public bool canMove = true;
+	float countDown = 0.4f;
+	public Transform orientation;
+	[HideInInspector]
+	public Vector2 movement_vector;
 
 
 
@@ -26,44 +29,52 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        GameController.goal = false;
+        
+        isDead = false;
+		GameController.goal = false;
 		rbody = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		anim.SetFloat ("Input_y", -1);
-	
-		
         
 
 
-	}
-	
+
+
+    }
+
 	// Update is called once per frame
 	void FixedUpdate () {
-        
+
 		orient ();
-        combine = Horizontal + Vertical;
+		combine = Horizontal + Vertical;
 
 
-        
-           PlayerControl();
 
-		if (!issafe && LightFlicker.dark) {
-            isDead = true;
-			Debug.Log ("Dead");
+		PlayerControl();
+
+		if (!issafe && LightFlicker.fade) {
+
+			if (countDown <= 0)
+			{
+				KillPlayer();
+			}
+			countDown -= Time.deltaTime;
+			Debug.Log(countDown);
 		}
-        else
-        {
-            isDead = false;
-        }
+		else
+		{
+			isDead = false;
+			countDown = 1.0f;
+		}
 	}
 
 
 	public virtual void PlayerControl () {
 
-        if (!canMove)
-        {
-            return;
-        }
+		if (!canMove)
+		{
+			return;
+		}
 
 		Horizontal = Input.GetAxisRaw ("Horizontal");
 		Vertical = Input.GetAxisRaw ("Vertical");
@@ -79,9 +90,9 @@ public class PlayerMovement : MonoBehaviour {
 			anim.SetBool ("isWalking", false);
 		}
 
-            rbody.velocity = !iscleaning ? movement_vector * speed : Vector2.zero;
-            //update rbody position
-        
+		rbody.velocity = !iscleaning ? movement_vector * speed : Vector2.zero;
+		//update rbody position
+
 	}
 
 	public void orient()
@@ -96,7 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 			orientation.rotation = Quaternion.Euler (transform.forward * 90);
 		}
 		if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
-		
+
 			orientation.rotation = Quaternion.Euler (transform.forward * 180);
 		}
 		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -107,10 +118,15 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 
-			
+	void KillPlayer()
+	{
+		isDead = true;
+		canMove = false;
+		rbody.velocity = Vector2.zero;
+		anim.SetTrigger("Die");
+		Debug.Log("Dead");
+	}
+
+
 
 }
-
-
-
-

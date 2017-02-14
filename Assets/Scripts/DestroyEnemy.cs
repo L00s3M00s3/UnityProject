@@ -4,7 +4,7 @@ using System.Collections;
 public class DestroyEnemy : MonoBehaviour{
 
 
-    public static int deadenemies;
+	public static int deadenemies;
 	public GameObject splatter;
 
 	//flash colour
@@ -21,10 +21,10 @@ public class DestroyEnemy : MonoBehaviour{
 
 	void Awake()
 	{
-		
+
 		splatter.GetComponent<Splat2D> ();
 		damaged = false;
-		
+
 
 
 
@@ -34,10 +34,10 @@ public class DestroyEnemy : MonoBehaviour{
 	{
 
 		if (damaged) {
-		
+
 			Sprite.color = flashColour;
 		} else {
-		
+
 			Sprite.color = Color.Lerp (Sprite.color, Color.white, flash * Time.deltaTime);
 		}
 		damaged = false;
@@ -46,32 +46,32 @@ public class DestroyEnemy : MonoBehaviour{
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-       
-            if (other.tag == "Bullet"&&GetComponentInChildren<Pattern_Control>().vulnerable)
-            {
 
-                CurrentHP -= 1;
-                other.gameObject.SetActive(false);
-                damaged = true;
-                //flash white
+		if (other.tag == "Bullet")
+		{
 
-                if (CurrentHP < 0)
-                {
+			CurrentHP -= 1;
+			other.gameObject.SetActive(false);
+			damaged = true;
+			//flash white
 
-                deadenemies++;
-                    CurrentHP = MaxHP;
+			if (CurrentHP < 0)
+			{
 
-                    this.gameObject.SetActive(false);
-                    //other.gameObject.SetActive(false); //deactivate bullet
+				deadenemies++;
+				CurrentHP = MaxHP;
 
-                    Instantiate(splatter, new Vector2(transform.position.x, transform.position.y), transform.rotation);
+				this.gameObject.SetActive(false);
+				//other.gameObject.SetActive(false); //deactivate bullet
 
-                }
-            
+				Instantiate(splatter, new Vector2(transform.position.x, transform.position.y), transform.rotation);
+
+			}
+
 		} else {
-		
+
 			damaged = false;
-		
+
 		}
 
 
@@ -80,7 +80,4 @@ public class DestroyEnemy : MonoBehaviour{
 
 
 }
-
-    
-
 

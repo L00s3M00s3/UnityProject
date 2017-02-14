@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//Camera script used to follow th player around the game screen
+
 public class cameraMovement : MonoBehaviour {
 
 	public Transform target;

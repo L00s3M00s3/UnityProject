@@ -5,33 +5,36 @@ using UnityEngine;
 public class SpiderMove : Enemy
 {
 
-    // Use this for initialization
-    void Start()
-    {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+	// Use this for initialization
+	void Start()
+	{
+		target = GameObject.FindGameObjectWithTag("Player").transform;
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 
-        if (!GetComponentInChildren<Pattern_Control>().vulnerable)
-        {
-            switch (GetComponentInChildren<Pattern_Control>()._state)
-            {
-                case Pattern_Control.State.relaxed:
-                    MoveTowards();
-                    break;
-                case Pattern_Control.State.worried:
-                    MoveAway();
-                    break;
-            }
-        }
-        else
-        {
-            Idle();
-        }
-    }
+		if (!GetComponentInChildren<Pattern_Control>().vulnerable)
+		{
+			switch (GetComponentInChildren<Pattern_Control>()._state)
+			{
+			case Pattern_Control.State.relaxed:
+				MoveTowards();
+				GetComponent<Animator> ().SetBool ("isWalking", true);
+				break;
+			case Pattern_Control.State.worried:
+				MoveAway();
+				GetComponent<Animator> ().SetBool ("isWalking", true);
+				break;
+			}
+		}
+		else
+		{
+			Idle();
+			GetComponent<Animator> ().SetBool ("isWalking", false);
+		}
+	}
 
 
 }

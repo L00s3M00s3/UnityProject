@@ -3,128 +3,146 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class TextBoxManager : MonoBehaviour {
+public class TextboxManager : MonoBehaviour {
 
-    public GameObject textbox;
+	public GameObject textbox;
 
-    public Text theText;
+	public Text theText;
 
-    public TextAsset textFile;
-    public string[] textLines;
+	public TextAsset textFile;
+	public string[] textLines;
 
-    public int currentLine, endLine;
+	public int currentLine, endLine;
 
-    PlayerMovement playermovement;
+	PlayerMovement playermovement;
 
-    public bool active,freezePlayer,buttonPress;
-    bool istyping,cancelTyping;
-    public float typeSpeed;
+	public bool active,freezePlayer,buttonPress;
+	bool waitforpress;
+
+	bool isRunning = false;
+	private bool isTyping = false;
+	private bool cancelTyping = false;
+	public float typeSpeed;
+
 
 	// Use this for initialization
 	void Start () {
-        playermovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+		playermovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
-        
 
-        if (textFile != null)
-        {
-            textLines = (textFile.text.Split('\n'));
-        }
 
-        if(endLine == 0)
-        {
-            endLine = textLines.Length - 1;
-        }
+		if (textFile != null)
+		{
+			textLines = (theText.text.Split('\n'));
+		}
 
-        if (active)
-        {
-            EnableText();
-        }
-        else
-        {
-            DisableText();
-        }
-		
+		if(endLine == 0)
+		{
+			endLine = textLines.Length - 1;
+		}
+
+		if (active)
+		{
+			EnableText();
+		}
+		else
+		{
+			DisableText();
+		}
+
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
-    {
-        if (!active)
-        {
-            return;
-        }
+	{
+		if (!active)
+		{
+			return;
+		}
+		//theText.text = textLines[currentLine];
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (!istyping)
-            {
-                currentLine++;
+		if (Input.GetKeyDown(KeyCode.E))
+		{
 
-                if (currentLine > endLine)
-                {
-                    DisableText();
-                }
-                else
-                {
-                    StartCoroutine(TextScroll(textLines[currentLine]));
-                }
-            }
-            else if(istyping&&!cancelTyping)
-            {
-                cancelTyping = true;
-            }
-        }
+			if (!isTyping) {
 
+				currentLine += 1;
+
+				if (currentLine > endLine) {
+
+					DisableText ();
+				} else {
+					if (!isRunning) {
+						StartCoroutine (TextScroll (textLines [currentLine]));
+					}
+				}
+			} 
+
+			//else if scrolling, and isnt already cancelled, cancel typing.
+			else if(isTyping && !cancelTyping){
+
+				cancelTyping = true;
+
+			}
+		}
+	}
+
+
+	private IEnumerator TextScroll (string lineOfText) {
+		isRunning = true;
+		int letter = 0;
+		theText.text = "";
+		isTyping = true;
+		cancelTyping = false;
+
+		while (isTyping && !cancelTyping && (letter < lineOfText.Length - 1)) {
+
+			theText.text += lineOfText [letter];
+			letter += 1;
+			yield return new WaitForSeconds (typeSpeed);
+		}
+
+		//if cancelled:
+
+		theText.text = lineOfText;
+		isTyping = false;
+		cancelTyping = false;
+		isRunning = false;
 
 	}
 
-    IEnumerator TextScroll(string lineOfText)
-    {
-        int letter = 0;
-        theText.text = "";
-        istyping = true;
-        cancelTyping = false;
-        while(istyping&&!cancelTyping&&(letter<lineOfText.Length - 1))
-        {
-            theText.text += lineOfText[letter];
-            letter += 1;
-            yield return new WaitForSeconds(typeSpeed);
-        }
-        theText.text = lineOfText;
-        istyping = false;
-        cancelTyping = false;
-    }
+	public void EnableText()
+	{
 
-    public void EnableText()
-    {
+		GenericInteraction.engaged = true;
+		textbox.SetActive (true);
         
-        textbox.SetActive(true);
-        active = true;
-        GenericInteraction.engaged = true;
-        if (freezePlayer)
-        {
-            playermovement.canMove = false;
-        }
-        StartCoroutine(TextScroll(textLines[currentLine]));
+
+		active = true;
+		if (freezePlayer) {
+			playermovement.canMove = false;
+		}
+		if (!isRunning) {
+			StartCoroutine (TextScroll (textLines [currentLine]));
+		}
+        freezePlayer = true;
     }
 
-    public void DisableText()
-    {
-        textbox.SetActive(false);
-        active = false;
-        playermovement.canMove = true;
-        GenericInteraction.engaged = false;
+	public void DisableText()
+	{
+		GenericInteraction.engaged = false;
+        freezePlayer = false;
+		textbox.SetActive(false);
+		active = false;
+		playermovement.canMove = true;
+	}
 
-    }
-
-    public void ReloadScript(TextAsset theText)
-    {
-        GameController.goal = true;
-        if(theText != null)
-        {
-            textLines = new string[1];
-            textLines = (theText.text.Split('\n'));
-        }
-    }
+	public void ReloadScript(TextAsset theText)
+	{
+		if(theText != null)
+		{
+			textLines = new string[1];
+			textLines = (theText.text.Split('\n'));
+		}
+	}
 }

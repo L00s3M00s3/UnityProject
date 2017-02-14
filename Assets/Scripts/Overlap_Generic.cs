@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Overlap_Generic : MonoBehaviour {
 
-    public Transform pointA,PointB;
-    public LayerMask layer;
-    [HideInInspector]
-    public bool overlap;
 
-    
+	public Transform pointA, pointB;
 
-    void FixedUpdate()
-    {
-        overlap = Physics2D.OverlapArea(pointA.position,PointB.position,layer);
-    }
+	public LayerMask layer;
+	[HideInInspector]
+	public bool overlap;
+
+
+	void FixedUpdate()
+	{
+		overlap = Physics2D.OverlapArea(pointA.position, pointB.position, layer);
+	}
 }

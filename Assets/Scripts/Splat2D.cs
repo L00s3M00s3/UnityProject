@@ -11,6 +11,7 @@ public class Splat2D : MonoBehaviour {
 	void Start () {
 	
 		color = GetComponent<SpriteRenderer> ().color;
+
 	}
 	
 	// Update is called once per frame

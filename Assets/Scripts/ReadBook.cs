@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class ReadBook : Overlap_Generic {
 
-    public TextAsset theText;
+	public TextAsset theText;
 
-    public int startLine, endLine;
+	public int startLine, endLine;
+	public AudioClip turnPage;
 
-    TextBoxManager textBox;
+	TextboxManager textBox;
 
-    ActivateTextAtLine textAtLine;
+	ActivateTextAtLine textAtLine;
 
-    void Start()
-    {
-        textBox = FindObjectOfType<TextBoxManager>();   
-        textAtLine = FindObjectOfType<ActivateTextAtLine>();
-    }
+	void Start()
+	{
+		textBox = FindObjectOfType<TextboxManager>();
+		textAtLine = FindObjectOfType<ActivateTextAtLine>();
+	}
 
-    // Update is called once per frame
-    void Update () {
+	// Update is called once per frame
+	void Update () {
 
 		if (overlap) {
-            textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
+
+			GameObject.Find ("Arrow").GetComponent<SpriteRenderer> ().enabled = false;
+
+			textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
+			AudioSource.PlayClipAtPoint (turnPage, transform.position);
 		}
 	}
 }
