@@ -22,8 +22,6 @@ public class Inventory : MonoBehaviour {
 	{
         
         inventory[(int)Items.Unarmed] = true;
-        
-
 	}
 
 	public void AddItem(int entry)

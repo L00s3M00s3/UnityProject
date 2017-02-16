@@ -7,6 +7,13 @@ public class Arm_Player : Overlap_Generic {
 	bool pickedup = false;
 	public int itemID;
 
+    void Start()
+    {
+        if (Inventory.inventory[itemID])
+        {
+            gameObject.SetActive(false);
+        }
+    }
 
 	void Update()
 	{
@@ -15,9 +22,7 @@ public class Arm_Player : Overlap_Generic {
 			
 				GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().AddItem(itemID);
 				gameObject.GetComponent<SpriteRenderer>().enabled = false;
-				pickedup = true; 
-                
-			
+				pickedup = true;
 		}
 	}
 }
