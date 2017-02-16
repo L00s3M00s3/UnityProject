@@ -7,7 +7,7 @@ public class UIInventory_Controller : MonoBehaviour {
 
 
 	private Image UIItem;
-	public Inventory currentItem;
+	
 	public Sprite[] inHand;	
 
 	void Awake()
@@ -22,7 +22,7 @@ public class UIInventory_Controller : MonoBehaviour {
 
 	void InventorySpriteChoice()
 	{
-		switch (currentItem.currentItem)
+		switch (Inventory.currentItem)
 		{
 		case Inventory.Items.Unarmed:
 			UIItem.sprite = inHand[0];

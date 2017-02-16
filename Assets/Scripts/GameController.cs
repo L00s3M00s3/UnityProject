@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 
 	public static GameController instance = null;
 	public static List<string> visitedLevels;
+    
     public static Vector3[] lastPosition;
 	public static bool goal;
 
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour {
             {
                 lastPosition[i] = Vector3.zero;
             }
+            SpawnInventory();
             instance = this;
 			visitedLevels = new List<string>(1);
 		} else if (instance != this) {
@@ -30,6 +32,11 @@ public class GameController : MonoBehaviour {
         
         DontDestroyOnLoad (gameObject);
 	}
+
+    void SpawnInventory()
+    {
+        Inventory.inventory = new bool[System.Enum.GetValues(typeof(Inventory.Items)).Length];
+    }
 
 	
 

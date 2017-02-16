@@ -23,11 +23,19 @@ public class ReadBook : Overlap_Generic {
 	void Update () {
 
 		if (overlap) {
-
-			GameObject.Find ("Arrow").GetComponent<SpriteRenderer> ().enabled = false;
-
-			textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
-			AudioSource.PlayClipAtPoint (turnPage, transform.position);
+            switch (Inventory.currentItem){
+                case Inventory.Items.Duster:
+                case Inventory.Items.Unarmed:
+                    GameObject.Find("Arrow").GetComponent<SpriteRenderer>().enabled = false;
+                    textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
+                    AudioSource.PlayClipAtPoint(turnPage, transform.position);
+                    Debug.Log("Hands");
+                    break;
+                default:
+                    Debug.Log("Broken");
+                    break;
+            }
+			
 		}
 	}
 }

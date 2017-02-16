@@ -25,7 +25,7 @@ public class WarpControlled : Overlap_Generic {
             //yield return StartCoroutine(sf.FadeToBlack());
             SceneManager.LoadScene(LeveltoLoad);
             GameController.lastPosition[SceneManager.GetActiveScene().buildIndex] = Player.transform.position;
-
+            
             //yield return StartCoroutine (sf.FadeToClear ());
         }
     }

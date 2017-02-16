@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-	public bool[] inventory;
-	int currentItemIndex = 0;
+	public static bool[] inventory;
+
+	static int currentItemIndex;
 	[HideInInspector]
-	public Items currentItem;
+	public static Items currentItem;
 
 
 	public enum Items
@@ -17,10 +18,11 @@ public class Inventory : MonoBehaviour {
 		Duster,//2
 	};
 
-	void Awake()
+	void Start()
 	{
-		inventory = new bool[System.Enum.GetValues(typeof(Items)).Length];
-		inventory[(int)Items.Unarmed] = true;
+        
+        inventory[(int)Items.Unarmed] = true;
+        
 
 	}
 
@@ -49,16 +51,16 @@ public class Inventory : MonoBehaviour {
 		{
 		case Items.Unarmed:
 
-			GetComponentInChildren<GenericInteraction>().Interaction(LayerMask.NameToLayer("Interact"));
+			GetComponentInChildren<GenericInteraction>().Interaction();
 			break;
 		case Items.Gun:
 			GetComponentInChildren<PlayerShooting>().DirectionalShooting();
 			break;
 		case Items.Duster:
-			GetComponentInChildren<GenericInteraction>().Interaction(LayerMask.NameToLayer("Dusting"));
+			GetComponentInChildren<GenericInteraction>().Interaction();
 			break;
 		default:
-			GetComponentInChildren<GenericInteraction>().Interaction(LayerMask.NameToLayer("Interact"));
+			GetComponentInChildren<GenericInteraction>().Interaction();
 			break;
 		}
 	}

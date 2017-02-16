@@ -9,7 +9,7 @@ public class GenericInteraction : MonoBehaviour {
 	private float interactionTimer = 0;
 	private float cooldown = 0.3f;
 	[HideInInspector]
-	Collider2D interactionRange;
+	public Collider2D interactionRange;
 	public GameObject interaction;
     public static bool engaged;
 
@@ -17,17 +17,22 @@ public class GenericInteraction : MonoBehaviour {
     void Awake () {
 		
 		interactionRange = interaction.GetComponent<Collider2D> ();
-        interaction.SetActive(false);
+        interactionRange.enabled = false;
 
-	}
 
-	public void Interaction(int layer)
+    }
+
+    void Update()
+    {
+        if (engaged||Inventory.currentItem.Equals(Inventory.Items.Gun))
+        {
+            interactionRange.enabled = false;
+        }
+    }
+
+	public void Interaction()
 	{
 		if (!engaged) {
-			if (interaction.layer != layer) {
-		
-				interaction.layer = layer;
-			}
 
 
 			if (Input.GetKeyDown (KeyCode.E) && !interacting) {

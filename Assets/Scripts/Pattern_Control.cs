@@ -113,7 +113,7 @@ public class Pattern_Control : MonoBehaviour {
 
 	void ChangeState()
 	{
-		if (currentItem.currentItem.Equals(Inventory.Items.Gun))
+		if (Inventory.currentItem.Equals(Inventory.Items.Gun))
 		{
 			_state = State.worried;
 		}

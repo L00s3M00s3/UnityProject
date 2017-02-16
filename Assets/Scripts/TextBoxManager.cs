@@ -8,7 +8,6 @@ public class TextboxManager : MonoBehaviour {
 	public GameObject textbox;
 
 	public Text theText;
-
 	public TextAsset textFile;
 	public string[] textLines;
 
@@ -60,7 +59,7 @@ public class TextboxManager : MonoBehaviour {
 			return;
 		}
 		//theText.text = textLines[currentLine];
-
+        
 		if (Input.GetKeyDown(KeyCode.E))
 		{
 
@@ -114,13 +113,14 @@ public class TextboxManager : MonoBehaviour {
 	public void EnableText()
 	{
 
-		GenericInteraction.engaged = true;
+        GenericInteraction.engaged = true;
 		textbox.SetActive (true);
         
 
 		active = true;
 		if (freezePlayer) {
 			playermovement.canMove = false;
+            playermovement.anim.SetBool("isWalking", false);
 		}
 		if (!isRunning) {
 			StartCoroutine (TextScroll (textLines [currentLine]));
