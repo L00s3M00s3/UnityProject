@@ -6,7 +6,7 @@ public class Sink_Manager : MonoBehaviour {
 
     public  GameObject[] Sinks;
     bool finished;
-    int count = 0;
+
     int Things;
     // Use this for initialization
     void Start () {

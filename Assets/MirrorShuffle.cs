@@ -90,20 +90,7 @@ public class MirrorShuffle : Overlap_Generic {
         }
     }
 
-    void rightDebug()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-        if (hit.collider != gameObject.GetComponent<Collider>())
-        {
-            Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
-        }
-        Debug.Log("RightReflection");
-    }
-    void leftDebug()
-    {
-        Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
-        Debug.Log("LeftReflection");
-    }
+    
 
     void debugReflection(Vector3 position)
     {

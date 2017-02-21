@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script to solve the freezer room, inherets from the generic overlap script
 public class AirCondition : Overlap_Generic {
 
 	private Color[] colour;

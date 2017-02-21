@@ -13,7 +13,6 @@ public class Pattern_Control : MonoBehaviour {
 	public bool vulnerable;
 	int limit = 21;
 	float worriedFire = 1.0f;
-	Inventory currentItem;
 	[HideInInspector]
 	public State _state = State.relaxed;
 
@@ -22,7 +21,6 @@ public class Pattern_Control : MonoBehaviour {
 	void Awake () {
 		Sprite = GetComponentInParent<SpriteRenderer>();
 		enemybullets = new GameObject[limit];
-		currentItem = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
 		nextfire = 2.0f;
 		for(int i = 0; i < limit; i++)
 		{

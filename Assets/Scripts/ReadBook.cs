@@ -10,26 +10,36 @@ public class ReadBook : Overlap_Generic {
 	public AudioClip turnPage;
 
 	TextboxManager textBox;
-
+    TESTINGNEWDIALOGUESYSTEM testDialougue;
+    PARSERTEST test;
 	ActivateTextAtLine textAtLine;
 
-	void Start()
+	void Awake()
 	{
 		textBox = FindObjectOfType<TextboxManager>();
+        testDialougue = FindObjectOfType<TESTINGNEWDIALOGUESYSTEM>();
 		textAtLine = FindObjectOfType<ActivateTextAtLine>();
+        test = FindObjectOfType<PARSERTEST>();
 	}
+    void Start()
+    {
+        test.LoadDialogue(theText);
+    }
 
 	// Update is called once per frame
 	void Update () {
-
-		if (overlap) {
+        
+        if (overlap) {
             switch (Inventory.currentItem){
                 case Inventory.Items.Duster:
                 case Inventory.Items.Unarmed:
-                    GameObject.Find("Arrow").GetComponent<SpriteRenderer>().enabled = false;
-                    textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
-                    AudioSource.PlayClipAtPoint(turnPage, transform.position);
-                    Debug.Log("Hands");
+                    
+                    testDialougue.EnableText();
+                    
+                    //GameObject.Find("Arrow").GetComponent<SpriteRenderer>().enabled = false;
+                    //textAtLine.ActivateCurrentFile(theText, startLine, endLine, textBox);
+                    //AudioSource.PlayClipAtPoint(turnPage, transform.position);
+                    //Debug.Log("Hands");
                     break;
                 default:
                     Debug.Log("Broken");
