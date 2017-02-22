@@ -9,8 +9,10 @@ public class MasterDialogue : Overlap_Generic {
 	public int startLine, endLine;
 
 
+    Parser parser;
+    DialogueSystem dialogueSystem;
 
-	TextboxManager textBox;
+    TextboxManager textBox;
 
 	ActivateTextAtLine textAtLine;
 
@@ -28,4 +30,13 @@ public class MasterDialogue : Overlap_Generic {
 	
 		}
 	}
+
+    public void ReloadScript(TextAsset newText)
+    {
+        if (newText != null)
+        {
+            parser.LoadDialogue(newText);
+            dialogueSystem.endLine = parser.count;
+        }
+    }
 }

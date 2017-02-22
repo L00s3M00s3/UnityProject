@@ -28,15 +28,7 @@ public class PARSERTEST : MonoBehaviour {
     List<DialogueLine> LINES;
     public string[] lines;
     // Use this for initialization
-    void Start () {
-        
-
-    }
-
-    void Update()
-    {
     
-    }
 	
 	public void LoadDialogue(TextAsset textfile)
     {
@@ -50,8 +42,6 @@ public class PARSERTEST : MonoBehaviour {
 
             for (int i = 0; i < lines.Length; i++)
             {
-               
-                
                 string dialougueChunk = lines[i];
                 string[] dialogue = dialougueChunk.Split(';');
                 DialogueLine lineEntry = new DialogueLine(dialogue[0], dialogue[1], int.Parse(dialogue[2]));
