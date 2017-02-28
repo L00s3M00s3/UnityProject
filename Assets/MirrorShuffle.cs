@@ -8,14 +8,24 @@ public class MirrorShuffle : Overlap_Generic {
     public bool shinning;
     [HideInInspector]
     public Vector3 origin;
-    GameObject encountered;
+    public GameObject encountered;
     float coolDown = 1.0f;
     const float buffer = 1.0f;
-    RaycastHit2D hit;
-	
+    public RaycastHit2D hit;
+    LineRenderer line;
+
+    void Awake()
+    {
+        line = GetComponent<LineRenderer>();
+    }
 
     void Start()
     {
+        line.SetPosition(0, gameObject.transform.position);
+        line.SetPosition(1, gameObject.transform.position);
+        line.startWidth = 0.1f;
+        line.endWidth = 0.1f;
+
         if (rightFacing)
         {
             transform.Rotate(-Vector3.forward, 90.0f);
@@ -43,6 +53,7 @@ public class MirrorShuffle : Overlap_Generic {
                     hit.collider.gameObject.GetComponent<MirrorShuffle>().shinning = true;
                     hit.collider.gameObject.GetComponent<MirrorShuffle>().origin = gameObject.transform.position;
                     encountered = hit.collider.gameObject;
+                    line.SetPosition(1, hit.collider.gameObject.transform.position);
                 }
                 if(hit.collider.tag == "Plant")
                 {
@@ -51,9 +62,11 @@ public class MirrorShuffle : Overlap_Generic {
             }
             else
             {
+
                 Debug.Log(gameObject.name + "isn't hitting anything");
                 if (encountered != null)
                 {
+                    
                     encountered.GetComponent<MirrorShuffle>().shinning = false;
                 }
             }
@@ -64,6 +77,7 @@ public class MirrorShuffle : Overlap_Generic {
             {
                 encountered.GetComponent<MirrorShuffle>().shinning = false;
             }
+            line.SetPosition(1, gameObject.transform.position);
         }
         
 	}
@@ -105,11 +119,13 @@ public class MirrorShuffle : Overlap_Generic {
                     if (rightFacing)
                     {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x + buffer, transform.position.y), Vector2.right, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + Vector3.right*5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
                     }
                     else {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x - buffer, transform.position.y), Vector2.left, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + Vector3.left * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
                     }
                 }
                 else
@@ -117,12 +133,14 @@ public class MirrorShuffle : Overlap_Generic {
                     if (rightFacing)
                     {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + buffer), Vector2.up, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + Vector3.up * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
                     }
                     else
                     {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - buffer), -Vector2.up, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + -Vector3.up * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
                     }
 
                 }
@@ -134,23 +152,27 @@ public class MirrorShuffle : Overlap_Generic {
                     if (rightFacing)
                     {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x - buffer, transform.position.y), Vector2.left, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + Vector3.left * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.left, Color.red);
                     }
                     else {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x + buffer, transform.position.y), Vector2.right, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + Vector3.right * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.right, Color.red);
                     }
                 }
                 else {
                     if (rightFacing)
                     {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - buffer), -Vector2.up, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + -Vector3.up * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.down, Color.red);
                     }
                     else
                     {
                         hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + buffer), Vector2.up, Mathf.Infinity, 1 << LayerMask.NameToLayer("Mirror"));
-                        Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
+                    line.SetPosition(1, gameObject.transform.position + Vector3.up * 5);
+                    Debug.DrawRay(gameObject.transform.position, Vector2.up, Color.red);
                     }
                 }
             }
